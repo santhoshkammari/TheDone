@@ -36,8 +36,22 @@ class App extends Component {
             style={styles.sideLogo}
           />
           <Text style={styles.done}>TheDone</Text>
-          <TouchableOpacity  style={styles.update}onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>
-          <Text style={styles.buttonText } onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>Update App</Text>
+
+
+          <TouchableOpacity  onPress={() => alert('Next Update!')}>
+          <Image
+          source={{uri:'https://static.thenounproject.com/png/2856492-200.png'}}
+            style={styles.updateDark}
+          />
+        </TouchableOpacity>
+
+
+
+
+
+        <TouchableOpacity  style={styles.update}onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>
+          <Text style={styles.buttonText } onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>
+            Update App</Text>
         </TouchableOpacity>
           <Image
           source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLYmxxuENq7AthA9_gqpGwVEs9xMHw-FEG3w&usqp=CAU'}}
@@ -101,17 +115,39 @@ const styles = StyleSheet.create({
   },example: {
     marginVertical: 24,
   },
+  
   update:{
     backgroundColor:'#c6f8e5',
     width:width*0.2,
     padding:5,
-    borderRadius:5
+    borderRadius:5,
+    marginLeft:3
+
+
+  },
+  updateDark:{
+    // backgroundColor:'#c6f8e5',
+justifyContent:'center',
+    padding:2,
+    width:width*0.1,
+    height:height*0.05,
+    borderRadius:5,
+    marginLeft:-10,
+    padding:5
+
+
+  },
+  updateDarkContent:{
+    backgroundColor:'#c6f8e5',
+    width:width*0.1,
+    borderRadius:5,
+    backgroundColor:'red'
 
 
   },
   done:{
     fontWeight: 'bold', fontSize: 20,
-    width:width*0.4,
+    width:width*0.35,
     padding:3,
     // backgroundColor:"yellow"
   },
@@ -120,12 +156,12 @@ const styles = StyleSheet.create({
 
   },
   sea:{
-     width: '10%', height:'100%'  ,marginLeft:height*0.02,
+     width: '10%', height:'100%'  ,marginLeft:height*0.01,
      
      //  width:width*0.1
   },
   sideLogo:
-    { width:width*0.1, height: '100%' ,marginRight:width*0.05,marginLeft:-width*0.05
+    { width:width*0.1, height: '100%' ,marginRight:width*0.02,marginLeft:-width*0.05
     
   }
   ,buttonText:{
