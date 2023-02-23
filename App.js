@@ -20,16 +20,23 @@ class App extends Component {
       name:'',
       x:0,
       countOfHabits:1,
-      array:[1,2,3,4,5]
+      array:[1,2,3,4,5],
+      background:['#fff','#243447'],
+      backgroundValue:0,
     };
   }
 
   
   render(){
-    
+    onPressed = () => {
+      this.setState({backgroundValue:2});
+            this.setState({backgroundColor:this.state.background[0]});
+      
+      
+    }
   return (
     <NavigationContainer >
-       <View style={{ flexDirection: 'row', justifyContent: 'space-between' ,borderRadius:5,marginTop:25}}>
+       <View style={{ flexDirection: 'row', justifyContent: 'space-between' ,borderRadius:5,marginTop:25,backgroundColor:'#243447',}}>
         <View style={styles.navigationBar}>
           <Image
             source={{uri:'https://static.vecteezy.com/system/resources/thumbnails/004/603/109/small/filter-line-icon-vector.jpg'}}
@@ -38,7 +45,7 @@ class App extends Component {
           <Text style={styles.done}>TheDone</Text>
 
 
-          <TouchableOpacity  onPress={() => alert('Next Update!')}>
+          <TouchableOpacity  onPress={this.onPressed}>
           <Image
           source={{uri:'https://static.thenounproject.com/png/2856492-200.png'}}
             style={styles.updateDark}
@@ -63,9 +70,12 @@ class App extends Component {
       <View>
       <Cards  name="Tap me!" array={this.state.array}x={this.state.x}/>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="#657786"
+        barStyle="light-content" />
     </View>
-   <View style={{margin:"5%",marginBottom:height*0.1,padding:10}}>
+    <Text style={{color:'red'}}>{this.state.backgroundValue}</Text>
+
+   <View style={{paddingBottom:height*0.1,padding:10,backgroundColor:'#243447'}}>
    <ButtonClicker content='click here'/>
    </View>
     </NavigationContainer>
@@ -85,6 +95,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height:60,
     // backgroundColor: 'blue',//fff
+    backgroundColor:'#243447',
     alignItems: 'center',
     // paddingBottom:height*0.3
     
@@ -97,7 +108,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: '#fff',
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
+    backgroundColor:'red',
     padding: 10
   },
   plusButton: {  
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
     width:width*0.2,
     padding:5,
     borderRadius:5,
-    marginLeft:3
+    marginLeft:3,
 
 
   },
@@ -153,6 +165,7 @@ justifyContent:'center',
   },
   navigationBar:{
     flexDirection: 'row',margin:'10%',
+    backgroundColor:'#14d26'
 
   },
   sea:{
