@@ -27,8 +27,6 @@ class MyButton extends Component {
     const handleInputChangecount=(val)=>{this.setState({counts:val});}
     return (
             <View>
-        
-        <Text>* click on cards for progress count</Text>
       <Text>*input values ({this.state.name}) and {this.state.times}</Text>
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 
@@ -98,14 +96,13 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#f0f0f0', //'#f0f0f0'
     borderRadius: 5,
-    marginRight:10
   },
   plus:{
     width:width*0.1,
     height:height*0.06,
     padding: 0,
     borderRadius: 1,
-    marginLeft:-15,
+    marginLeft:-5,
     marginRight:5,
   alignItems:'center'  },
 

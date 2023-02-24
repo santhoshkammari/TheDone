@@ -2,17 +2,18 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView,StyleSheet, Text, View,Image,TextInput,Dimensions ,Linking,ScrollView} from 'react-native';
 import CardWithName from './CardWithName';
 import SampleComponent from './SampleComponent';
-import { TouchableOpacity ,Navigator} from 'react-native';
+import { TouchableOpacity ,Navigator,Button} from 'react-native';
 import React,{ Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import ButtonClicker from './MyButton.js';
-// import {ProgressBar} from '@react-native-community/progress-bar-android';
 import Cards from './Card.js';
+import ImageName from './assets/sidebar.png';
+import AccountImage from './assets/account.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const {width,height}=Dimensions.get('window');
 
 class App extends Component {
-
-
   constructor(props)
   {
     super(props);
@@ -23,61 +24,72 @@ class App extends Component {
       array:[1,2,3,4,5],
       background:['#fff','#243447'],
       backgroundValue:0,
+      Dm:0,
+      x:[{uri:'https://static.vecteezy.com/system/resources/thumbnails/004/603/109/small/filter-line-icon-vector.jpg'},ImageName],
+      bc:['white','#243447','#2d2d30','#fbfcf8'],
+      backgroundStyle:StyleSheet.create({flex: 1,width: '100%',height:60,backgroundColor:'white',alignItems: 'center',}),
+      navigationBarBc:StyleSheet.create({flexDirection: 'row', justifyContent: 'space-between' ,marginTop:45}),
+      navigationBarBc2:StyleSheet.create({flexDirection: 'row', justifyContent: 'space-between' }),
+
     };
   }
 
   
   render(){
-    onPressed = () => {
-      this.setState({backgroundValue:2});
-            this.setState({backgroundColor:this.state.background[0]});
-      
-      
+
+    const onPressed = () => {
+      this.setState({
+        backgroundValue:this.state.backgroundValue+1});
+        this.setState({backgroundColor:this.state.background[0],Dm:this.state.Dm^1,
+        backgroundStyle: StyleSheet.create({flex: 1,width: '100%',height:60,backgroundColor:'white',alignItems: 'center',backgroundColor:this.state.bc[this.state.Dm^1]}),
+        navigationBarBc: StyleSheet.create({flexDirection: 'row', justifyContent: 'space-between' ,marginTop:height*0.04,backgroundColor:this.state.bc[this.state.Dm^1]}),
+        navigationBarBc2: StyleSheet.create({flexDirection: 'row', justifyContent: 'space-between' ,backgroundColor:this.state.bc[this.state.Dm^1]}),
+
+            });
     }
+    
   return (
     <NavigationContainer >
-       <View style={{ flexDirection: 'row', justifyContent: 'space-between' ,borderRadius:5,marginTop:25,backgroundColor:'#243447',}}>
+
+      <View style={this.state.navigationBarBc}>
         <View style={styles.navigationBar}>
-          <Image
-            source={{uri:'https://static.vecteezy.com/system/resources/thumbnails/004/603/109/small/filter-line-icon-vector.jpg'}}
-            style={styles.sideLogo}
-          />
+        <Icon name="bars" size={30} color="black" />
           <Text style={styles.done}>TheDone</Text>
+          <Icon name="user" size={30} color="black" />
+        </View>
+      </View>
 
-
-          <TouchableOpacity  onPress={this.onPressed}>
-          <Image
-          source={{uri:'https://static.thenounproject.com/png/2856492-200.png'}}
-            style={styles.updateDark}
-          />
+      <View style={this.state.navigationBarBc2}>
+        <View style={styles.navigationBar2}>
+        <TouchableOpacity onPress={onPressed}>
+            <Image source={{uri:'https://static.thenounproject.com/png/2856492-200.png'}} style={styles.updateDark}/>
         </TouchableOpacity>
-
-
-
-
-
         <TouchableOpacity  style={styles.update}onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>
           <Text style={styles.buttonText } onPress={() => Linking.openURL('https://drive.google.com/file/d/1ZwFl3j2tenGIqMWyqW13FO8wxaS7hzEQ/view?usp=share_link')}>
             Update App</Text>
         </TouchableOpacity>
-          <Image
-          source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLYmxxuENq7AthA9_gqpGwVEs9xMHw-FEG3w&usqp=CAU'}}
-            style={styles.sea}
-          />
+        <Icon name="search" style={{marginLeft:'10%'}}size={30} color="black" />
         </View>
-      </View>
-    <View style={styles.container}>
+        </View>
+
+    <View style={this.state.backgroundStyle}>
       <View>
       <Cards  name="Tap me!" array={this.state.array}x={this.state.x}/>
       </View>
-      <StatusBar backgroundColor="#657786"
+      <StatusBar backgroundColor={this.state.bc[this.state.Dm]} //#657786
         barStyle="light-content" />
     </View>
-    <Text style={{color:'red'}}>{this.state.backgroundValue}</Text>
-
-   <View style={{paddingBottom:height*0.1,padding:10,backgroundColor:'#243447'}}>
+    
+   <View style={{borderTopRightRadius:30,borderTopLeftRadius:30,padding:10,backgroundColor:this.state.bc[3]}}    > 
    <ButtonClicker content='click here'/>
    </View>
+   <View style={{paddingBottom:height*0.05,borderTopRightRadius:40,borderTopLeftRadius:35,padding:10,flexDirection:'row',backgroundColor:'#FFFEFE'}}>
+   <Icon name="home" style={{marginLeft:'10%'}}size={30}  color="#c7d2cc"/>
+   <Icon name="plus" style={{marginLeft:'25%',marginRight:'10%'}}size={30} color="#c7d2cc" />
+   <Icon name="heart" style={{marginLeft:'15%'}}size={30} color="#c7d2cc" />
+
+   </View>
+   
     </NavigationContainer>
   );
   }
@@ -129,7 +141,7 @@ const styles = StyleSheet.create({
   },
   
   update:{
-    backgroundColor:'#c6f8e5',
+    backgroundColor:'lightblue',
     width:width*0.2,
     padding:5,
     borderRadius:5,
@@ -138,16 +150,11 @@ const styles = StyleSheet.create({
 
   },
   updateDark:{
-    // backgroundColor:'#c6f8e5',
-justifyContent:'center',
-    padding:2,
+    justifyContent:'center',
     width:width*0.1,
     height:height*0.05,
     borderRadius:5,
-    marginLeft:-10,
-    padding:5
-
-
+    marginLeft:'10%'
   },
   updateDarkContent:{
     backgroundColor:'#c6f8e5',
@@ -161,28 +168,39 @@ justifyContent:'center',
     fontWeight: 'bold', fontSize: 20,
     width:width*0.35,
     padding:3,
-    // backgroundColor:"yellow"
+    marginLeft:width*0.1,
+    marginRight:width*0.1,
+    // backgroundColor:"yellow",
+    alignItems:'center'
   },
   navigationBar:{
-    flexDirection: 'row',margin:'10%',
-    backgroundColor:'#14d26'
+    flexDirection: 'row',marginTop:'10%',marginLeft:'10%',marginRight:'10%',
+    backgroundColor:'#14d26',
+
+  },
+  navigationBar2:{
+    flexDirection: 'row',marginBottom:'5%',marginLeft:'20%',marginRight:'10%',marginTop:'5%',
+    width:width*0.6,
+    // backgroundColor:'red',
 
   },
   sea:{
-     width: '10%', height:'100%'  ,marginLeft:height*0.01,
+     width: '15%',marginLeft:'10%',
      
      //  width:width*0.1
   },
   sideLogo:
-    { width:width*0.1, height: '100%' ,marginRight:width*0.02,marginLeft:-width*0.05
+    { width:width*0.12, height: '100%' ,
     
   }
   ,buttonText:{
     width:width*0.2,
     fontSize:8,
     margin:5,
+  },
+  accountImage:{
+    width: '15%', height:30  ,marginLeft:height*0.01,
   }
-,
 });
 export default App;
 

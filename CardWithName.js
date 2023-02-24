@@ -11,7 +11,8 @@ const CardWithName = (prop) => {
 
     <View style={styles.card}>
       <Text style={styles.name}>{prop.name}</Text>
-      <ProgressBar style={styles.cards}progress={prop.x/10} color={"green"} />
+      <ProgressBar style={styles.cards}progress={prop.x/10} color={"#6CCCBC"} />
+
     </View>
   );
 };
@@ -19,13 +20,13 @@ const CardWithName = (prop) => {
 const styles = {
   
   card: {
-    width: width*0.8,
-    height:height*0.07,
+    width: width*0.9,
+    height:height*0.09,
     padding:4,
     margin:5,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderRadius: 10,
-    elevation: 5,
+    // elevation:0,
   },
   cards:{
     position:'relative',
@@ -33,10 +34,11 @@ const styles = {
     bottom:30,
     zIndex:4,
     opacity:0.5,
-    width: width*0.8,
-    height:height*0.07,
+    width: width*0.9,
+    height:height*0.09,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 15,
+    borderTopRightRadius:15,
     elevation: 5,
     padding:0,
     margin:0
@@ -45,6 +47,8 @@ const styles = {
   name: {
     fontSize: 20,
     fontWeight: 'bold',
+    // backgroundColor:'cyan'
+    
   },
 };
 
