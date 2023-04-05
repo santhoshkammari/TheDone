@@ -5,8 +5,6 @@ class TimerInput extends Component {
   render() {
     return (
       <ScrollView>
-        <Text>Click On Seconds to start</Text>
-
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Enter Timer Value (mins):</Text>
           <TextInput
@@ -22,7 +20,6 @@ class TimerInput extends Component {
 }
 const styles = StyleSheet.create({
   inputContainer: {
-    marginTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -37,7 +34,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: '#CCCCCC',
     flex: 1,
-    color: 'grey',
+    textAlign: 'center',
+    color: 'black',
   },
 });
 export default TimerInput;

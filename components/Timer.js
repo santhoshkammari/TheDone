@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Alert, StyleSheet} from 'react-native';
 import TimerInput from './TimerInput';
+import PushNotification from 'react-native-push-notification';
 class TimerCard extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,11 @@ class TimerCard extends Component {
     });
   };
 
+  handleTimerStop = () => {
+    this.setState({isTimerRunning: false});
+    clearInterval(this.timerInterval);
+  };
+
   handleTimerReset = () => {
     this.setState({
       value: 0,
@@ -39,6 +45,7 @@ class TimerCard extends Component {
       this.handleTimerStart();
     }
   };
+
   handleValueChange = value => {
     this.setState({
       value: parseInt(value),
@@ -52,9 +59,24 @@ class TimerCard extends Component {
         <TouchableOpacity onPress={this.handleCardClick}>
           <Text style={styles.timerText}>{this.state.timeLeft}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleTimerReset}>
-          <Text style={styles.resetText}>Reset Timer</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={
+              this.state.isTimerRunning
+                ? this.handleTimerStop
+                : this.handleCardClick
+            }
+            style={[styles.button, styles.startButton]}>
+            <Text style={styles.buttonText}>
+              {this.state.isTimerRunning ? 'Stop' : 'Start'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.handleTimerReset}
+            style={[styles.button, styles.resetButton]}>
+            <Text style={styles.buttonText}>Reset</Text>
+          </TouchableOpacity>
+        </View>
         <TimerInput
           value={this.state.value}
           onChange={this.handleValueChange}
@@ -63,6 +85,7 @@ class TimerCard extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: '#FFFFFF',
@@ -91,5 +114,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: 'black',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 16,
+  },
+  button: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  startButton: {
+    backgroundColor: 'green',
+    marginRight: 8,
+  },
+  resetButton: {
+    backgroundColor: 'red',
+    marginRight: 8,
+  },
 });
+
 export default TimerCard;

@@ -11,7 +11,7 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import {ProgressBar} from 'react-native-paper';
+import {ProgressBar, Button as Button2} from 'react-native-paper';
 // import React, { Component } from "react";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/AntDesign';
@@ -252,9 +252,6 @@ class HabitProgress extends Component {
     }
   };
   addCard = () => {
-    if (this.state.cardInputHeight == 0) {
-      return;
-    }
     if (this.state.cardNameValue == '' || this.state.inputCount == 0) {
       return;
     }
@@ -342,10 +339,8 @@ class HabitProgress extends Component {
             <View
               key={i}
               style={{
-                margin: 5,
-                marginLeft: 4,
-                marginRight: 4,
-                height: height * 0.1,
+                margin: 8,
+                height: height * 0.11,
               }}>
               <ProgressBar
                 style={styles.cardOnBottom}
@@ -358,9 +353,9 @@ class HabitProgress extends Component {
                   horizontal={true}
                   style={{
                     width: width * 0.9,
-                    height: height * 0.09,
+                    height: height * 0.11, //0.1
                     position: 'relative',
-                    top: -70.5,
+                    top: -84,
                     zIndex: 2,
                     flexDirection: 'row',
                     backgroundColor: this.state.bc[this.state.Dm + 8],
@@ -372,7 +367,7 @@ class HabitProgress extends Component {
                   <View style={styles.doneIconsCard}>
                     <Icon
                       name={this.state.cardIconNames[i]}
-                      size={width * 0.08}
+                      size={height * 0.06}
                       color="#6CCABC"
                     />
                   </View>
@@ -380,20 +375,23 @@ class HabitProgress extends Component {
                     style={{
                       flex: 1,
                       width: width * 0.45,
-                      margin: 10,
+                      margin: 8,
                     }}>
                     <Text
                       style={{
                         color: this.state.bc[this.state.Dm + 9],
                         // opacity:2,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: 'bold',
+                        margin: 5,
+                        fontStyle: 'Sans-serif',
                       }}>
                       {this.state.cardName[i]}
                     </Text>
                     <Text
                       style={{
                         fontSize: 15,
+                        margin: 8,
                         color: this.state.bc[this.state.Dm + 9],
                       }}>
                       {this.state.xp[i]} / {this.state.x[i]}
@@ -403,8 +401,8 @@ class HabitProgress extends Component {
                     <Icon2
                       name="plus"
                       style={{
-                        padding: 20,
-                        fontSize: 20,
+                        padding: 24,
+                        fontSize: 22,
                         text: 'bold',
                       }}
                       size={8}
@@ -511,127 +509,52 @@ class HabitProgress extends Component {
         <ScrollView style={styles.habitsBack}>
           <View>{transformedHabits}</View>
         </ScrollView>
-        <View style={{height: height * 0.3}}>
-          <View
-            style={{
-              height: height * 0.07,
-              margin: 10,
-            }}>
-            <View
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            height: height * 0.07,
+            // backgroundColor: 'red',
+            height: height * 0.1,
+            opacity: 0.75,
+          }}>
+          <View>
+            <TextInput
+              value={this.state.cardNameValue}
+              onChangeText={text => this.setState({cardNameValue: text})}
+              placeholder="Track "
+              placeholderTextColor={this.state.bc[this.state.Dm + 9]}
               style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                zIndex: 2,
-                // backgroundColor: "#f1f6fb",
-                opacity: this.state.cardInputHeight,
-                height: height * 0.06 * this.state.cardInputHeight,
+                backgroundColor: this.state.bc[this.state.Dm + 8], //'#f0f0f0'
+                borderRadius: 25,
+                width: width * 0.4,
+                textAlign: 'center',
                 margin: 10,
-              }}>
-              <View>
-                <TextInput
-                  value={this.state.cardNameValue}
-                  onChangeText={text => this.setState({cardNameValue: text})}
-                  placeholder="Track "
-                  placeholderTextColor={this.state.bc[this.state.Dm + 9]}
-                  style={{
-                    backgroundColor: this.state.bc[this.state.Dm + 8], //'#f0f0f0'
-                    borderRadius: 5,
-                    width: width * 0.4,
-                    textAlign: 'center',
-                    marginRight: width * 0.1,
-                    color: this.state.bc[this.state.Dm + 9],
-                  }}
-                />
-              </View>
-              <View>
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  style={{
-                    width: width * 0.15,
-                    textAlign: 'center',
-                    backgroundColor: this.state.bc[this.state.Dm + 8], //'#f0f0f0'
-                    borderRadius: 5,
-                  }}
-                  onScroll={this.handleScroll}
-                  scrollEventThrottle={16}>
-                  {numbers.map(number => (
-                    <View
-                      key={number}
-                      style={{
-                        height: height * 0.07,
-                        // backgroundColor:'red',
-                        // margin:1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}>
-                      <Text
-                        style={{
-                          fontSize: 20,
-                          color: this.state.bc[this.state.Dm + 9],
-                        }}>
-                        {number}
-                      </Text>
-                    </View>
-                  ))}
-                </ScrollView>
-
-                {/* <TextInput
-                value={this.state.inputCount}
-                onChangeText={this.handleInputChangecount}
-                placeholder="N"
-                style={{
-                  width: width * 0.15,
-                  textAlign: "center",
-                  backgroundColor: "#2a4262", //'#f0f0f0'
-                  borderRadius: 5,
-                }}
-                keyboardType="numeric"
-              /> */}
-              </View>
-              <View>
-                <Icon1
-                  name="arrowup"
-                  style={{marginLeft: width * 0.05, padding: 5}}
-                  size={25}
-                  color="#6f7e95"
-                  onPress={this.addCard}
-                />
-              </View>
-            </View>
+                color: this.state.bc[this.state.Dm + 9],
+              }}
+            />
+          </View>
+          <View>
+            <TextInput
+              value={this.state.inputCount}
+              onChangeText={text => this.setState({inputCount: text})}
+              placeholder="N "
+              placeholderTextColor={this.state.bc[this.state.Dm + 9]}
+              keyboardType="numeric"
+              style={{
+                backgroundColor: this.state.bc[this.state.Dm + 8], //'#f0f0f0'
+                borderRadius: 10,
+                width: width * 0.12,
+                textAlign: 'center',
+                margin: 10,
+                color: this.state.bc[this.state.Dm + 9],
+              }}
+            />
           </View>
 
-          {/* <View
-            style={{
-              // paddingBottom: height * 0.05,
-              height: height * 0.15,
-              padding: 20,
-              flexDirection: 'row',
-              backgroundColor: this.state.bc[this.state.Dm + 8],
-              borderTopRightRadius: 25,
-              borderTopLeftRadius: 25,
-              position: 'relative',
-              justifyContent: 'space-around',
-            }}>
-            <Icon4
-              name="home"
-              // style={{ marginLeft: width*0.1 }}
-              size={25}
-              color="#c7d2cc"
-            />
-            <Icon1
-              name="pluscircleo"
-              // style={{ marginLeft: width*0.2  }}
-              size={25}
-              color="#c7d2cc"
-              onPress={this.addCardToScreen}
-            />
-            <Icon
-              name="heart"
-              // style={{ marginLeft: width*0.2 }}
-              size={25}
-              color="#c7d2cc"
-            />
-          </View> */}
+          <Button2 mode="contained" style={{margin: 15}} onPress={this.addCard}>
+            Add
+          </Button2>
         </View>
       </SafeAreaView>
     );

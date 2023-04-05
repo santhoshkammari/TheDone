@@ -7,12 +7,13 @@ import Icon4 from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 
-import {useColorScheme} from 'react-native';
-
+import {useColorScheme,Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
 import HabitProgress from './components/HabitProgress';
 import SettingsScreen from './components/SettingsScreen';
 import TimerCard from './components/Timer';
 import SavedData from './components/SavedData';
+import Calendar from './components/Calendar';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,11 +29,12 @@ const useTheme = () => {
 };
 
 const App = () => {
+  let x=0;
 const theme=useTheme();
   return ( 
     <NavigationContainer>
   <Tab.Navigator >
-    <Tab.Screen   
+  <Tab.Screen   
       name="HabitProgress"
       component={HabitProgress }
       options={{
@@ -42,20 +44,46 @@ const theme=useTheme();
           <Icon4
               name="home"
               // style={{ marginLeft: width*0.1 }}
-              size={25}
-              color="#c7d2cc"
+              size={size}
+              color={color}
             />
         ),
         tabBarStyle: {
           backgroundColor: theme === 'dark' ? '#ffffff' : '#2a4262',
+          height:height*0.08,
         },
         tabBarLabelStyle: {
           fontSize: 0,
         },
        tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'blue',
+        tabBarActiveTintColor: 'black',
       }}
     />
+    <Tab.Screen   
+    name="Calendar"
+    component={Calendar }
+    options={{
+      headerShown: false,
+      tabBarLabel: 'Calendar',
+      tabBarIcon: ({ color, size }) => (
+        <Icon4
+            name="calendar"
+            // style={{ marginLeft: width*0.1 }}
+            size={size}
+            color={color}
+          />
+      ),
+      tabBarStyle: {
+        backgroundColor: theme === 'dark' ? '#ffffff' : '#2a4262',
+      },
+      tabBarLabelStyle: {
+        fontSize: 0,
+      },
+     tabBarInactiveTintColor: 'gray',
+      tabBarActiveTintColor: 'black',
+    }}
+  />
+    
     <Tab.Screen
       name="Timer"
       component={TimerCard}
@@ -68,10 +96,12 @@ const theme=useTheme();
           <Icon2
               name="timer-outline"
               // style={{ marginLeft: width*0.2 }}
-              size={25}
-              color="#c7d2cc"
+              size={size}
+              color={color}
             />
         ),
+       tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: 'black',
       }}
     />
     <Tab.Screen
@@ -86,10 +116,12 @@ const theme=useTheme();
           <Icon
               name="heart"
               // style={{ marginLeft: width*0.2 }}
-              size={25}
-              color="#c7d2cc"
+              size={size}
+              color={color}
             />
         ),
+       tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: 'black',
       }}
     />
     <Tab.Screen
@@ -104,10 +136,12 @@ const theme=useTheme();
           <Icon4
               name="settings"
               // style={{ marginLeft: width*0.2 }}
-              size={25}
-              color="#c7d2cc"
+              size={size}
+              color={color}
             />
         ),
+       tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: 'black',
       }}
     />
   </Tab.Navigator>
@@ -117,3 +151,4 @@ const theme=useTheme();
 }
  
 export default App;
+

@@ -55,7 +55,7 @@ class SavedData extends Component {
   };
   handleSaveTime = () => {
     const {savedTimes} = this.state;
-    const currentTime = new Date().toLocaleTimeString(); // get the current time from the phone
+    const currentTime = new Date().toString().slice(0, 21); // get the current time from the phone
     this.setState({
       savedTimes: [...savedTimes, currentTime],
     });
