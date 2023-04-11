@@ -1,21 +1,5 @@
-// import React, {Component} from 'react';
-// import {View} from 'react-native';
-// import {Text} from 'react-native-paper';
-// class SettingsScreen extends Component {
-//   state = {};
-//   render() {
-//     return (
-//       <View>
-//         <Text> this is settingsScreen</Text>
-//       </View>
-//     );
-//   }
-// }
-// <View></View>;
-
-// export default SettingsScreen;
 import React, {Component} from 'react';
-import {View, Text, Switch, StyleSheet} from 'react-native';
+import {View, Text, Switch, StyleSheet, Linking} from 'react-native';
 import {Button} from 'react-native-paper';
 
 class Settings extends Component {
@@ -30,8 +14,7 @@ class Settings extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
-
+    const {navigation, clicked} = this.props;
     const {
       account,
       darkTheme,
@@ -44,6 +27,16 @@ class Settings extends Component {
 
     return (
       <View style={styles.container}>
+        <Button
+          mode="contained"
+          style={{margin: 10}}
+          onPress={() =>
+            Linking.openURL(
+              'https://drive.google.com/file/d/1reeajb7qVopMi7C-nYIaul6tu7Yhk5lT/view?usp=share_link',
+            )
+          }>
+          Update
+        </Button>
         <View style={styles.setting}>
           <Text style={styles.settingText}>Account</Text>
           <Switch
@@ -90,12 +83,6 @@ class Settings extends Component {
           <Text style={styles.settingText}>Language</Text>
           <Text>{language}</Text>
         </View>
-        <Button
-          mode="contained"
-          style={{margin: 10}}
-          onPress={() => navigation.navigate('HabitProgress')}>
-          Home
-        </Button>
       </View>
     );
   }

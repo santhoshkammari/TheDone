@@ -1,34 +1,89 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Dimensions,
-  Linking,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
+  buttonContainer: {
+    width: width * 0.15,
+    height: width * 0.15,
+    borderRadius: 25,
+    backgroundColor: '#213255',
+    opacity: 0.75,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: height * 0.02,
+    right: width * 0.08,
+    elevation: 3,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FDF5E6',
+  },
+  textInputStyle: {
+    width: '80%',
+    height: 40,
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  ProgressBase: {
+    flex: 1,
+  },
+  ProgressBarBottom: {
+    flex: 1,
+    position: 'absolute',
+    borderRadius: 15,
+
+    opacity: 0.9,
+  },
+  cardOnBottom: {
+    width: width * 0.9,
+    height: height * 0.09,
+    borderRadius: 15,
+  },
+  ProgressBarTop: {
+    width: width * 0.9,
+    height: height * 0.09, //0.1
+    flexDirection: 'row',
+    opacity: 0.75,
+    borderRadius: 15,
+  },
+  homeBarBackCard: {
+    borderRadius: 10,
+    width: width * 0.12,
+    height: height * 0.05,
+    padding: width * 0.02,
+    alignItems: 'center',
+  },
   navigationBarBc: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: '2%',
-    paddingBottom: '2%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    marginTop: '2%',
+    marginBottom: '5%',
   },
-  navigationBarBc2: {
+  navigationBar: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: height * 0.1,
+    padding: '5%',
+  },
+
+  navigationBar2: {
+    flexDirection: 'row',
+    width: '100%',
+    // backgroundColor: "green",
     justifyContent: 'center',
+    marginTop: '2%',
+  },
+  Bar2Icon: {
+    margin: '1%',
   },
   habitsBack: {
     padding: width * 0.02,
-    height: height * 0.65,
-    marginTop: 10,
-    // position: 'absolute',
+    height: height * 0.6,
+    marginTop: '2%',
   },
 
   doneIcons: {
@@ -42,12 +97,12 @@ export const styles = StyleSheet.create({
     paddingBottom: 10,
     alignItems: 'center',
   },
-  doneIconsCard: {
+  cardIconNamesBg: {
     backgroundColor: '#2b3a5c',
-    borderRadius: 10,
-    width: width * 0.17,
-    height: height * 0.08,
-    padding: 5,
+    borderRadius: 15,
+    width: width * 0.12,
+    height: height * 0.06,
+    padding: '2%',
     // paddingTop: 10,
     // paddingBottom: 10,
     alignItems: 'center',
@@ -55,16 +110,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 10,
     marginRight: 2,
-  },
-  cardOnBottom: {
-    width: width * 0.9,
-    height: height * 0.11,
-    position: 'relative',
-    zIndex: 1,
-    opacity: 1,
-    backgroundColor: '', //fff
-    borderRadius: 15,
-    margin: 5,
   },
 
   plusButton: {
@@ -180,22 +225,7 @@ export const styles = StyleSheet.create({
     opacity: 0.6,
     color: 'white',
   },
-  navigationBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    // backgroundColor: "red",
-    width: width * 0.9,
-    height: height * 0.1,
-    padding: 10,
-  },
-  navigationBar2: {
-    flexDirection: 'row',
 
-    width: width * 0.6,
-    // backgroundColor: "green",
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
   sea: {
     width: '15%',
     marginLeft: '10%',

@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Alert, StyleSheet} from 'react-native';
-import TimerInput from './TimerInput';
-import PushNotification from 'react-native-push-notification';
+import TimerInput from '../TimerInput';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+
+import {Button} from 'react-native-paper';
+
+const Stack = createStackNavigator();
+
 class TimerCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: 0,
-      timeLeft: 2 * 60,
+      timeLeft: 0,
       isTimerRunning: false,
     };
   }
@@ -34,7 +40,7 @@ class TimerCard extends Component {
   handleTimerReset = () => {
     this.setState({
       value: 0,
-      timeLeft: 2 * 60,
+      timeLeft: 0,
       isTimerRunning: false,
     });
     clearInterval(this.timerInterval);
@@ -54,33 +60,36 @@ class TimerCard extends Component {
   };
 
   render() {
+    const {navigation} = this.props;
     return (
-      <View style={styles.cardContainer}>
-        <TouchableOpacity onPress={this.handleCardClick}>
-          <Text style={styles.timerText}>{this.state.timeLeft}</Text>
-        </TouchableOpacity>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={
-              this.state.isTimerRunning
-                ? this.handleTimerStop
-                : this.handleCardClick
-            }
-            style={[styles.button, styles.startButton]}>
-            <Text style={styles.buttonText}>
-              {this.state.isTimerRunning ? 'Stop' : 'Start'}
-            </Text>
+      <View>
+        <View style={styles.cardContainer}>
+          <TouchableOpacity onPress={this.handleCardClick}>
+            <Text style={styles.timerText}>{this.state.timeLeft}</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.handleTimerReset}
-            style={[styles.button, styles.resetButton]}>
-            <Text style={styles.buttonText}>Reset</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={
+                this.state.isTimerRunning
+                  ? this.handleTimerStop
+                  : this.handleCardClick
+              }
+              style={[styles.button, styles.startButton]}>
+              <Text style={styles.buttonText}>
+                {this.state.isTimerRunning ? 'Stop' : 'Start'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.handleTimerReset}
+              style={[styles.button, styles.resetButton]}>
+              <Text style={styles.buttonText}>Reset</Text>
+            </TouchableOpacity>
+          </View>
+          <TimerInput
+            value={this.state.value}
+            onChange={this.handleValueChange}
+          />
         </View>
-        <TimerInput
-          value={this.state.value}
-          onChange={this.handleValueChange}
-        />
       </View>
     );
   }

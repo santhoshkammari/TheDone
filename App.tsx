@@ -1,19 +1,17 @@
 import React ,{Component,useState} from 'react';
-
+import { View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon4 from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon2 from 'react-native-vector-icons/Ionicons';
-
-import {useColorScheme,Dimensions} from 'react-native';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import {useColorScheme,Dimensions,Alert} from 'react-native';
 const {width, height} = Dimensions.get('window');
-import HabitProgress from './components/HabitProgress';
+import HabitProgress from './components/HomePage';
 import SettingsScreen from './components/SettingsScreen';
-import TimerCard from './components/Timer';
-import SavedData from './components/SavedData';
-import Calendar from './components/Calendar';
+import TodoList from './components/TodoList/todoList';
+import Like from './components/Like/Like';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,124 +26,155 @@ const useTheme = () => {
   return isDarkMode ? 'dark' : 'light';
 };
 
+
 const App = () => {
-  let x=0;
-const theme=useTheme();
+const [clicked,setClicked]=useState(0);
+const [theme,setTheme]=useState(0);
+
+const handleOnPressed= () =>{
+  setClicked(clicked===0?1:0);
+}
+const handleOnTheme= () =>{
+  setTheme(theme==0?1:0);
+}
   return ( 
-    <NavigationContainer>
-  <Tab.Navigator >
-  <Tab.Screen   
+    <NavigationContainer >
+      <View style={{ flex: 1 ,
+        backgroundColor:theme==0?'#f1f6fb':'#15202B',
+        justifyContent:'space-around'
+        }}>
+  <Tab.Navigator 
+  screenOptions={{
+    tabBarStyle:{
+      backgroundColor:theme==0?'#ffffff':'#2b3a5c',
+       height:height*0.11,
+    } ,
+    tabBarLabelStyle: {
+      fontSize: 0,
+    },
+    tabBarInactiveTintColor: '#aebdd1',
+        tabBarActiveTintColor: '#213255',
+  }}
+ >
+    {/* <Tab.Screen   
       name="HabitProgress"
-      component={HabitProgress }
+      component={()=><HabitProgress clicked={clicked} theme={theme} handleTheme={handleOnTheme}/> }
       options={{
         headerShown: false,
         tabBarLabel: 'HabitProgress',
         tabBarIcon: ({ color, size }) => (
           <Icon4
               name="home"
-              // style={{ marginLeft: width*0.1 }}
-              size={size}
+              size={20}
               color={color}
             />
         ),
-        tabBarStyle: {
-          backgroundColor: theme === 'dark' ? '#ffffff' : '#2a4262',
-          height:height*0.08,
-        },
-        tabBarLabelStyle: {
-          fontSize: 0,
-        },
-       tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'black',
+        
+        
       }}
-    />
+    />  */}
+    {/* <Tab.Screen
+  name="HabitProgress"
+  component={() => (
+    <HabitProgress clicked={clicked} theme={theme} handleTheme={handleOnTheme} />
+  )}
+  options={{
+    headerShown: false,
+    tabBarLabel: 'HabitProgress',
+    tabBarIcon: ({ color, size }) => (
+      <Icon4 name="home" size={20} color={color} />
+    ),
+  }}
+/> */}
+<Tab.Screen
+  name="HabitProgress"
+  options={{
+    headerShown: false,
+    tabBarLabel: 'HabitProgress',
+    tabBarIcon: ({ color, size }) => (
+      <Icon4 name="home" size={20} color={color} />
+    ),
+  }}
+>
+  {() => <HabitProgress clicked={clicked} theme={theme} handleTheme={handleOnTheme} />} 
+</Tab.Screen>
+
     <Tab.Screen   
-    name="Calendar"
-    component={Calendar }
-    options={{
-      headerShown: false,
-      tabBarLabel: 'Calendar',
-      tabBarIcon: ({ color, size }) => (
-        <Icon4
-            name="calendar"
-            // style={{ marginLeft: width*0.1 }}
-            size={size}
+      name="TodoList"
+      component={TodoList }
+      options={{
+        headerShown: false,
+        tabBarLabel: 'TodoList',
+        tabBarIcon: ({ color, size }) => (
+          <Icon5
+            name="tasks"
+            size={20}
             color={color}
           />
-      ),
-      tabBarStyle: {
-        backgroundColor: theme === 'dark' ? '#ffffff' : '#2a4262',
-      },
-      tabBarLabelStyle: {
-        fontSize: 0,
-      },
-     tabBarInactiveTintColor: 'gray',
-      tabBarActiveTintColor: 'black',
-    }}
-  />
-    
-    <Tab.Screen
-      name="Timer"
-      component={TimerCard}
-      options={{
-        tabBarLabel: 'Timer',
-        tabBarLabelStyle: {
-          fontSize: 0,
-        },
-        tabBarIcon: ({ color, size }) => (
-          <Icon2
-              name="timer-outline"
-              // style={{ marginLeft: width*0.2 }}
-              size={size}
-              color={color}
-            />
-        ),
-       tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'black',
+          
+        )
+        
+        
+      
       }}
-    />
+    />  
     <Tab.Screen
-      name="SavedData"
-      component={SavedData}
+      name="Like"
+      component={Like}
       options={{
-        tabBarLabel: 'SavedData',
-        tabBarLabelStyle: {
-          fontSize: 0,
-        },
-        tabBarIcon: ({ color, size }) => (
-          <Icon
-              name="heart"
-              // style={{ marginLeft: width*0.2 }}
-              size={size}
-              color={color}
-            />
-        ),
-       tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'black',
-      }}
-    />
-    <Tab.Screen
-      name="Settings"
-      component={SettingsScreen}
-      options={{
-        tabBarLabel: 'Settings',
+        headerShown: false,
+        tabBarLabel: 'Like',
         tabBarLabelStyle: {
           fontSize: 0,
         },
         tabBarIcon: ({ color, size }) => (
           <Icon4
-              name="settings"
-              // style={{ marginLeft: width*0.2 }}
-              size={size}
+              name="heart"
+              size={20}
               color={color}
             />
         ),
-       tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'black',
       }}
     />
-  </Tab.Navigator>
+    {/* <Tab.Screen
+      name="Settings"
+      component={()=><SettingsScreen  clicked={clicked}/>}
+      options={{
+        tabBarLabel: 'Settings',
+       
+        tabBarIcon: ({ color, size }) => (
+          <Icon4
+              name="settings"
+              size={20}
+              color={color}
+            />
+        ),
+      }}
+    /> */}
+    <Tab.Screen
+  name="Settings"
+  options={{
+    tabBarLabel: 'Settings',
+    tabBarIcon: ({ color, size }) => (
+      <Icon4
+        name="settings"
+        size={20}
+        color={color}
+      />
+    ),
+  }}
+>
+  {(props) => (
+    <SettingsScreen
+      clicked={clicked}
+      {...props}
+    />
+  )}
+</Tab.Screen>
 
+    
+  </Tab.Navigator>
+</View>
     </NavigationContainer>
    );
 }
