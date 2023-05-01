@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-paper';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {View, Text, StyleSheet} from 'react-native';
 import moment from 'moment';
 class Calendar extends Component {
   constructor(props) {
@@ -32,7 +30,6 @@ class Calendar extends Component {
   }
 
   render() {
-    const {navigation} = this.props;
     return (
       <View>
         <View style={styles.container}>
@@ -48,12 +45,6 @@ class Calendar extends Component {
           </View>
           <View style={styles.datesContainer}>{this.renderDays()}</View>
         </View>
-        <Button
-          mode="contained"
-          style={{margin: 10}}
-          onPress={() => navigation.navigate('HabitProgress')}>
-          Go Back
-        </Button>
       </View>
     );
   }

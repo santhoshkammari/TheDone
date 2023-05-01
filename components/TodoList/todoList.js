@@ -71,19 +71,6 @@ class TodoList extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>To-Do List</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={newTask}
-            onChangeText={text => this.setState({newTask: text})}
-            placeholder="Enter a task"
-            placeholderTextColor={'#213255'}
-          />
-          <TouchableOpacity style={styles.addButton} onPress={this.addTask}>
-            <Text style={styles.addButtonText}>Add</Text>
-          </TouchableOpacity>
-        </View>
         <ScrollView style={styles.taskList}>
           {sortedTasks.map((task, index) => (
             <View key={index} style={styles.taskContainer}>
@@ -113,6 +100,18 @@ class TodoList extends Component {
             </View>
           ))}
         </ScrollView>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={newTask}
+            onChangeText={text => this.setState({newTask: text})}
+            placeholder="Enter a task"
+            placeholderTextColor={'#213255'}
+          />
+          <TouchableOpacity style={styles.addButton} onPress={this.addTask}>
+            <Text style={styles.addButtonText}>Add</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     flexDirection: 'row',
-    marginBottom: 16,
   },
   input: {
     flex: 1,

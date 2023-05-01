@@ -26,7 +26,11 @@ class Settings extends Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {backgroundColor: this.state.darkTheme ? '#213255' : 'white'},
+        ]}>
         <Button
           mode="contained"
           style={{margin: 10}}
@@ -38,50 +42,94 @@ class Settings extends Component {
           Update
         </Button>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Account</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Account
+          </Text>
           <Switch
             value={account}
             onValueChange={value => this.setState({account: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Dark Theme</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Dark Theme
+          </Text>
           <Switch
             value={darkTheme}
             onValueChange={value => this.setState({darkTheme: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Cellular Data</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Cellular Data
+          </Text>
           <Switch
             value={cellularData}
             onValueChange={value => this.setState({cellularData: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Notifications</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Notifications
+          </Text>
           <Switch
             value={notifications}
             onValueChange={value => this.setState({notifications: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Location Services</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Location Services
+          </Text>
           <Switch
             value={locationServices}
             onValueChange={value => this.setState({locationServices: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Touch ID</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Touch ID
+          </Text>
           <Switch
             value={touchID}
             onValueChange={value => this.setState({touchID: value})}
           />
         </View>
         <View style={styles.setting}>
-          <Text style={styles.settingText}>Language</Text>
-          <Text>{language}</Text>
+          <Text
+            style={[
+              {color: this.state.darkTheme ? 'white' : 'black'},
+              styles.settingText,
+            ]}>
+            Language
+          </Text>
+          <Text style={{color: this.state.darkTheme ? 'white' : 'black'}}>
+            {language}
+          </Text>
         </View>
       </View>
     );
@@ -91,7 +139,7 @@ class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+
     padding: 20,
   },
   setting: {
@@ -104,7 +152,6 @@ const styles = StyleSheet.create({
   },
   settingText: {
     fontSize: 16,
-    color: 'black',
   },
 });
 

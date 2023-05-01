@@ -12,7 +12,9 @@ import HabitProgress from './components/HomePage';
 import SettingsScreen from './components/SettingsScreen';
 import TodoList from './components/TodoList/todoList';
 import Like from './components/Like/Like';
-
+import MusicPlayer from './components/Music/MusicPlayer';
+import MusicStack from './components/Music/MusicStack';
+import Timer from './components/Like/Timer';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const tabOptions = {
@@ -100,10 +102,9 @@ const handleOnTheme= () =>{
 </Tab.Screen>
 
     <Tab.Screen   
-      name="TodoList"
+      name="To-Do List"
       component={TodoList }
       options={{
-        headerShown: false,
         tabBarLabel: 'TodoList',
         tabBarIcon: ({ color, size }) => (
           <Icon5
@@ -118,6 +119,24 @@ const handleOnTheme= () =>{
       
       }}
     />  
+    <Tab.Screen
+      name="MusicStack"
+      component={MusicStack}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'Music',
+        tabBarLabelStyle: {
+          fontSize: 0,
+        },
+        tabBarIcon: ({ color, size }) => (
+          <Icon4
+              name="music"
+              size={20}
+              color={color}
+            />
+        ),
+      }}
+    />
     <Tab.Screen
       name="Like"
       component={Like}

@@ -59,6 +59,7 @@ class Home extends Component {
       nameInput: '',
       x: [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       h: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      hi: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       cardName: [
         'Sample',
         'Scroll For More',
@@ -106,6 +107,7 @@ class Home extends Component {
       dataPrint: 'no value initially',
       cardInputHeight: 0,
       iconName: ['pluscircleo', 'closecircleo'],
+
       cardIconNames: [
         'smile-o',
         'futbol-o',
@@ -135,6 +137,8 @@ class Home extends Component {
       isVisible: false,
       inputValue: '',
       onLongPressValue: 0,
+      selectedName: '',
+      iconNameIndex: 0,
     };
   }
   componentDidMount() {
@@ -295,23 +299,27 @@ class Home extends Component {
     if (this.state.cardNameValue == '' || this.state.inputCount == 0) {
       return;
     }
-    const {h, cardName, x} = this.state;
+    const {h, cardName, x, hi} = this.state;
     const newArray = [...h];
     const cardName2 = [...cardName];
     const x2 = [...x];
+    const hi2 = [...hi];
+
     let j1 = 0;
     for (let i3 = 0; i3 < 12; i3++) {
       if (newArray[i3] == 1) {
         newArray[j1] = newArray[i3];
         x2[j1] = x2[i3];
         cardName2[j1] = cardName2[i3];
+        hi2[j1] = hi2[i3];
         j1++;
       }
     }
     newArray[j1] = 1;
     cardName2[j1] = this.state.cardNameValue;
     x2[j1] = this.state.inputCount;
-    this.setState({h: newArray, cardName: cardName2, x: x2});
+    hi2[j1] = this.state.iconNameIndex;
+    this.setState({h: newArray, cardName: cardName2, x: x2, hi: hi2});
   };
   onPressButton = Ind => {};
   handleScroll = event => {
@@ -361,8 +369,74 @@ class Home extends Component {
       xp: xp2,
     });
   };
-
+  openNameSelector = (name, index) => {
+    this.setState({selectedName: name, iconNameIndex: index});
+  };
   render() {
+    // habitNames array containing all names as strings
+    const habitNames = [
+      'water',
+      'exercise',
+      'sleep',
+      'meditation',
+      'reading',
+      'writing',
+      'yoga',
+      'cleaning',
+      'budget',
+      'learning',
+      'socializing',
+      'gardening',
+      'brushing',
+      'skincare',
+      'stretching',
+      'bicycle',
+      'bike',
+      'hike',
+      'walk',
+      'run',
+      'swim',
+      'weights',
+      'dance',
+      'mindfulness',
+      'organization',
+      'recycling',
+      'music',
+      'healthy-eating',
+    ];
+
+    // habitIconNames array containing icon as strings
+    const habitIconNames = [
+      'tint',
+      'heartbeat',
+      'bed',
+      'om',
+      'book',
+      'highlighter',
+      'spa',
+      'broom',
+      'money-bill',
+      'graduation-cap',
+      'users',
+      'seedling',
+      'tooth',
+      'spa',
+      'running',
+      'bicycle',
+      'biking',
+      'hiking',
+      'walking',
+      'running',
+      'swimmer',
+      'dumbbell',
+      'music',
+      'peace',
+      'box',
+      'recycle',
+      'music',
+      'utensils',
+    ];
+
     const numbers = [...Array(26).keys()];
     const {navigation, clicked} = this.props;
     const message = this.getTimeBasedMessage();
@@ -395,33 +469,33 @@ class Home extends Component {
                     horizontal={true}
                     style={{
                       width: width * 0.09,
-                      height: height * 0.09,
+                      height: height * 0.1,
                       flexDirection: 'row',
                       borderRadius: 15,
                       backgroundColor: this.state.bc[this.state.Dm + 8],
                     }}>
                     <View style={styles.cardIconNamesBg}>
-                      <Icon
-                        name={this.state.cardIconNames[i]}
-                        size={height * 0.036}
-                        color="#6CCABC"
+                      <Icon5
+                        name={habitIconNames[this.state.hi[i]]}
+                        size={height * 0.033}
+                        color="white"
                       />
                     </View>
                     <TouchableOpacity
                       onLongPress={() => this.handleOnLongPressValue(i)}
-                      delayLongPress={750}>
+                      delayLongPress={500}>
                       <View
                         style={{
                           flex: 1,
-                          width: width * 0.55,
-                          padding: '2%',
-                          justifyContent: 'space-around',
-                          marginLeft: '5%',
+                          width: width * 0.5,
+                          justifyContent: 'center',
+                          paddingLeft: '5%',
+                          // backgroundColor: 'red',
                         }}>
                         <Text
                           style={{
                             color: this.state.bc[this.state.Dm + 9],
-                            fontSize: 15,
+                            fontSize: height * 0.025,
                             fontWeight: 'bold',
                             fontStyle: 'Sans-serif',
                           }}>
@@ -429,7 +503,8 @@ class Home extends Component {
                         </Text>
                         <Text
                           style={{
-                            fontSize: 12,
+                            fontSize: height * 0.02,
+                            fontWeight: 'bold',
                             color: this.state.bc[this.state.Dm + 9],
                           }}>
                           {this.state.xp[i]} / {this.state.x[i]}
@@ -440,11 +515,11 @@ class Home extends Component {
                       <Icon2
                         name="plus"
                         style={{
-                          padding: width * 0.06,
-                          fontSize: 22,
+                          padding: width * 0.067,
+
                           text: 'bold',
                         }}
-                        size={15}
+                        size={20}
                         color={this.state.bc[this.state.Dm + 9]}
                       />
                     </TouchableOpacity>
@@ -464,7 +539,8 @@ class Home extends Component {
       });
     }
     return (
-      <SafeAreaView style={{backgroundColor: this.state.bc[this.state.Dm]}}>
+      <SafeAreaView
+        style={{backgroundColor: this.state.bc[this.state.Dm], height: '100%'}}>
         <StatusBar
           backgroundColor={this.state.bc[this.state.Dm]}
           barStyle={this.state.Dm == 0 ? 'dark-content' : 'light-content'}
@@ -475,15 +551,15 @@ class Home extends Component {
               <View
                 style={{
                   backgroundColor: this.state.bc[this.state.Dm + 2],
-                  borderRadius: 14,
-                  width: width * 0.13,
-                  height: height * 0.06,
-                  padding: width * 0.03,
+                  borderRadius: 15,
+                  width: width * 0.15,
+                  height: height * 0.065,
+                  padding: width * 0.035,
                   alignItems: 'center',
                 }}>
                 <Icon4
                   name="user"
-                  size={height * 0.025}
+                  size={height * 0.03}
                   color={this.state.bc[this.state.Dm + 4]}
                 />
               </View>
@@ -498,7 +574,7 @@ class Home extends Component {
                 <Text
                   style={{
                     fontWeight: 'bold',
-                    fontSize: 25,
+                    fontSize: height * 0.04,
                     width: width * 0.35,
                     textAlign: 'center',
                     color: this.state.bc[this.state.Dm + 4],
@@ -521,15 +597,15 @@ class Home extends Component {
               <View
                 style={{
                   backgroundColor: this.state.bc[this.state.Dm + 2],
-                  borderRadius: 14,
-                  width: width * 0.13,
-                  height: height * 0.06,
-                  padding: width * 0.03,
+                  borderRadius: 15,
+                  width: width * 0.15,
+                  height: height * 0.065,
+                  padding: width * 0.035,
                   alignItems: 'center',
                 }}>
                 <Icon1
                   name="calendar"
-                  size={height * 0.025}
+                  size={height * 0.03}
                   color={this.state.bc[this.state.Dm + 4]}
                 />
               </View>
@@ -548,21 +624,21 @@ class Home extends Component {
             name="rainbow"
             size={20}
             color={this.state.bc[this.state.Dm + 4]}
-            onPress={this.onPressed}
+            // onPress={this.onPressed}
             style={styles.Bar2Icon}
           />
           <Icon2
             name="light-up"
             size={20}
             color={this.state.bc[this.state.Dm + 4]}
-            onPress={this.onPressed}
+            // onPress={this.onPressed}
             style={styles.Bar2Icon}
           />
           <Icon4
             name="moon"
             size={20}
             color={this.state.bc[this.state.Dm + 4]}
-            onPress={this.onPressed}
+            // onPress={this.onPressed}
             style={styles.Bar2Icon}
           />
           <Icon
@@ -572,7 +648,7 @@ class Home extends Component {
             style={styles.Bar2Icon}
           />
         </View>
-        <View style={{height: height * 0.7}}>
+        <View style={{height: height * 0.6}}>
           <ScrollView style={styles.habitsBack}>
             <View>{transformedHabits}</View>
           </ScrollView>
@@ -587,11 +663,40 @@ class Home extends Component {
           animationType="fade"
           onRequestClose={this.closeModal}>
           <View style={styles.modalContainer}>
+            <View style={{height: 100}}>
+              <ScrollView horizontal style={{paddingTop: 20}}>
+                {habitNames.map((name, index) => (
+                  <TouchableOpacity
+                    key={name}
+                    onPress={() => this.openNameSelector(name, index)}
+                    style={{
+                      backgroundColor:
+                        this.state.selectedName === name
+                          ? '#2ecc71'
+                          : '#E5E5E5',
+                      borderRadius: 25,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      padding: 10,
+                      margin: 5,
+                      height: height * 0.07,
+                    }}>
+                    <Text
+                      style={{
+                        color:
+                          this.state.selectedName === name ? '#FFF' : '#000',
+                      }}>
+                      {name}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            </View>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
-                height: height * 0.1,
+                height: height * 0.08,
                 opacity: 0.75,
                 backgroundColor: '#E5E5E5',
                 borderRadius: 25,

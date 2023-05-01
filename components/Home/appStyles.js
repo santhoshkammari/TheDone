@@ -16,9 +16,10 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   modalContainer: {
+    height: '100%',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     backgroundColor: '#FDF5E6',
   },
   textInputStyle: {
@@ -28,6 +29,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
   },
+  habitsBack: {
+    padding: width * 0.02,
+    marginTop: '2%',
+  },
   ProgressBase: {
     flex: 1,
   },
@@ -35,21 +40,21 @@ export const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     borderRadius: 15,
-
     opacity: 0.9,
-  },
-  cardOnBottom: {
-    width: width * 0.9,
-    height: height * 0.09,
-    borderRadius: 15,
   },
   ProgressBarTop: {
     width: width * 0.9,
-    height: height * 0.09, //0.1
+    height: height * 0.1, //0.1
     flexDirection: 'row',
-    opacity: 0.75,
+    opacity: 0.8,
     borderRadius: 15,
   },
+  cardOnBottom: {
+    width: width * 0.9,
+    height: height * 0.1,
+    borderRadius: 15,
+  },
+
   homeBarBackCard: {
     borderRadius: 10,
     width: width * 0.12,
@@ -80,11 +85,6 @@ export const styles = StyleSheet.create({
   Bar2Icon: {
     margin: '1%',
   },
-  habitsBack: {
-    padding: width * 0.02,
-    height: height * 0.6,
-    marginTop: '2%',
-  },
 
   doneIcons: {
     backgroundColor: '#2a4262',
@@ -99,17 +99,12 @@ export const styles = StyleSheet.create({
   },
   cardIconNamesBg: {
     backgroundColor: '#2b3a5c',
-    borderRadius: 15,
-    width: width * 0.12,
+    borderRadius: 12,
+    width: width * 0.13,
     height: height * 0.06,
     padding: '2%',
-    // paddingTop: 10,
-    // paddingBottom: 10,
     alignItems: 'center',
-    marginBottom: 10,
-    marginLeft: 10,
-    marginTop: 10,
-    marginRight: 2,
+    margin: 10,
   },
 
   plusButton: {

@@ -4,25 +4,20 @@ import {View} from 'react-native';
 class Utilities extends Component {
   render() {
     const {navigation} = this.props;
+
     return (
       <View>
         <Button
-          mode="contained"
-          style={{padding: '5%', margin: '5%'}}
-          onPress={() => navigation.navigate('SavedData')}>
-          SavedData
-        </Button>
-        <Button
-          mode="contained"
+          buttonColor="#C8A2C8"
           style={{padding: '5%', margin: '5%'}}
           onPress={() => navigation.navigate('Timer')}>
           Timer
         </Button>
         <Button
-          mode="contained"
+          buttonColor="#C8A2C8"
           style={{padding: '5%', margin: '5%'}}
-          onPress={() => navigation.navigate('TestingFeature')}>
-          TestingFeatures
+          onPress={() => navigation.navigate('Track')}>
+          Track
         </Button>
       </View>
     );
